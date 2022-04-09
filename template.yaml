@@ -1,0 +1,149 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: "Serverless AWS API for blogs"
+
+Parameters:
+  EnvironmentMode:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - prod
+    Description: Enter "dev" or "prod". Default is "dev".  
+  
+Globals:
+  Function:
+    Timeout: 15
+    Runtime: nodejs14.x
+    CodeUri: api/
+    Architectures:
+      - x86_64
+    Environment:
+      Variables:
+        tableName: !Ref BlogsTable
+        mode: !Ref EnvironmentMode
+
+Resources:
+  GetBlogsFunction:
+    Type: AWS::Serverless::Function
+    DependsOn: BlogsTable
+    Properties:
+      FunctionName: GetBlogs
+      Handler: src/handlers/getBlogs.handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref BlogsTable
+      Events:
+        BlogsApi:
+          Type: HttpApi
+          Properties:
+            Path: /blogs
+            Method: GET
+
+  GetBlogFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: GetBlog
+      Handler: src/handlers/getBlog.handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref BlogsTable
+      Events:
+        BlogsApi:
+          Type: HttpApi
+          Properties:
+            Path: /blogs/{id}
+            Method: GET
+
+  CreateBlogFunction:
+    Type: AWS::Serverless::Function
+    DependsOn: BlogsTable
+    Properties:
+      FunctionName: CreateBlog
+      Handler: src/handlers/createBlog.handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref BlogsTable
+      Events:
+        BlogsApi:
+          Type: HttpApi
+          Properties:
+            Path: /blogs
+            Method: POST        
+  
+  UpdateBlogFunction:
+    Type: AWS::Serverless::Function
+    DependsOn: BlogsTable
+    Properties:
+      FunctionName: UpdateBlog
+      Handler: src/handlers/updateBlog.handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref BlogsTable
+      Events:
+        BlogsApi:
+          Type: HttpApi
+          Properties:
+            Path: /blogs/{id}
+            Method: PATCH
+
+  DeleteBlogFunction:
+    Type: AWS::Serverless::Function
+    DependsOn: BlogsTable
+    Properties:
+      FunctionName: DeleteBlog
+      Handler: src/handlers/deleteBlog.handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref BlogsTable
+      Events:
+        BlogsApi:
+          Type: HttpApi
+          Properties:
+            Path: /blogs/{id}
+            Method: DELETE
+            
+  BlogsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub 'Blogs-${EnvironmentMode}'
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: createdAt
+          AttributeType: S
+        - AttributeName: updatedAt
+          AttributeType: S
+        - AttributeName: title
+          AttributeType: S
+        - AttributeName: body
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: BlogsDevGSI-1
+          KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: createdAt
+            KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+        - IndexName: BlogsDevGSI-2
+          KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: updatedAt
+            KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1

@@ -1,0 +1,21 @@
+{
+  "name": "aws-serverless-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sanadriu",
+  "license": "ISC",
+  "dependencies": {
+    "@middy/core": "^2.5.7",
+    "@middy/http-error-handler": "^2.5.7",
+    "@middy/http-json-body-parser": "^2.5.7",
+    "aws-sdk": "^2.1110.0",
+    "http-errors": "^2.0.0",
+    "uuid": "^8.3.2",
+    "validator": "^13.7.0",
+    "yup": "^0.32.11"
+  }
+}
