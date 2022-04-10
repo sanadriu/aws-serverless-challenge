@@ -10,6 +10,9 @@ Parameters:
       - dev
       - prod
     Description: Enter "dev" or "prod". Default is "dev".
+  ClientURLs:
+    Type: CommaDelimitedList
+    Description: List of URLs allowed to access to the user pool.
   
 Globals:
   Function:
@@ -24,11 +27,62 @@ Globals:
         mode: !Ref EnvironmentMode
 
 Resources:
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: !Sub '${AWS::StackName}-user-pool'
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 8
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: true
+          RequireUppercase: true
+      AutoVerifiedAttributes:
+        - email
+      UsernameAttributes:
+        - email
+
+  UserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref UserPool
+      ClientName: !Sub '${AWS::StackName}-user-pool-client'
+      GenerateSecret: false
+      SupportedIdentityProviders:
+        - COGNITO
+      AllowedOAuthFlowsUserPoolClient: true
+      AllowedOAuthFlows:
+        - code
+        - implicit
+      AllowedOAuthScopes:
+        - email
+        - openid
+        - profile
+      CallbackURLs: !Ref ClientURLs
+      LogoutURLs: !Ref ClientURLs
+
+  UserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      UserPoolId: !Ref UserPool
+      Domain: !Ref AWS::AccountId
+
   HttpApi:
     Type: AWS::Serverless::HttpApi
     Properties:
       StageName: !Ref EnvironmentMode
       Description: !Sub 'HTTP Serverless API for ${EnvironmentMode} stage'
+      Auth:
+        Authorizers:
+          Cognito:
+            AuthorizationScopes:
+              - email
+            JwtConfiguration:
+              issuer: !Sub 'https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPool}'
+              audience: 
+                - !Ref UserPoolClient
+            IdentitySource: "$request.header.Authorization"
 
   GetBlogsFunction:
     Type: AWS::Serverless::Function
@@ -79,6 +133,8 @@ Resources:
             Path: /blogs
             Method: POST  
             ApiId: !Ref HttpApi
+            Auth:
+              Authorizer: Cognito
   
   UpdateBlogFunction:
     Type: AWS::Serverless::Function
@@ -96,6 +152,8 @@ Resources:
             Path: /blogs/{id}
             Method: PATCH
             ApiId: !Ref HttpApi
+            Auth:
+              Authorizer: Cognito
 
   DeleteBlogFunction:
     Type: AWS::Serverless::Function
@@ -113,6 +171,8 @@ Resources:
             Path: /blogs/{id}
             Method: DELETE
             ApiId: !Ref HttpApi
+            Auth:
+              Authorizer: Cognito
 
   BlogsTable:
     Type: AWS::DynamoDB::Table
@@ -148,6 +208,18 @@ Resources:
             ProjectionType: ALL
             
 Outputs:
+  UserPoolId: 
+    Description: User pool ID
+    Value: !Ref UserPool
+
+  UserPoolClientId:
+    Description: User pool client application ID
+    Value: !Ref UserPoolClient
+
+  AuthUrl:
+    Description: Authentication URL
+    Value: !Sub 'https://${UserPoolDomain}.auth.${AWS::Region}.amazoncognito.com'
+
   ApiUrl:
     Description: API Url
     Value: !Sub 'https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com/${EnvironmentMode}'

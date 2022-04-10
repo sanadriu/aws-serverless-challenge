@@ -1,7 +1,6 @@
 const aws = require("aws-sdk");
 const uuid = require("uuid");
 
-aws.Attribute;
 class BlogsRepository {
 	#repository = new aws.DynamoDB.DocumentClient();
 	#tableName = process.env.tableName;
