@@ -1,6 +1,6 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
-Description: "Serverless AWS API for blogs"
+Description: "Serverless AWS Challenge: Blogs API"
 
 Parameters:
   EnvironmentMode:
@@ -9,7 +9,7 @@ Parameters:
     AllowedValues:
       - dev
       - prod
-    Description: Enter "dev" or "prod". Default is "dev".  
+    Description: Enter "dev" or "prod". Default is "dev".
   
 Globals:
   Function:
@@ -24,99 +24,107 @@ Globals:
         mode: !Ref EnvironmentMode
 
 Resources:
+  HttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: !Ref EnvironmentMode
+      Description: !Sub 'HTTP Serverless API for ${EnvironmentMode} stage'
+
   GetBlogsFunction:
     Type: AWS::Serverless::Function
     DependsOn: BlogsTable
     Properties:
-      FunctionName: GetBlogs
+      FunctionName: !Sub '${AWS::StackName}-lambda-GetBlogs'
       Handler: src/handlers/getBlogs.handler
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BlogsTable
       Events:
-        BlogsApi:
+        ApiEvent:
           Type: HttpApi
           Properties:
             Path: /blogs
             Method: GET
+            ApiId: !Ref HttpApi
 
   GetBlogFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: GetBlog
+      FunctionName: !Sub '${AWS::StackName}-lambda-GetBlog'
       Handler: src/handlers/getBlog.handler
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BlogsTable
       Events:
-        BlogsApi:
+        ApiEvent:
           Type: HttpApi
           Properties:
             Path: /blogs/{id}
             Method: GET
+            ApiId: !Ref HttpApi
 
   CreateBlogFunction:
     Type: AWS::Serverless::Function
     DependsOn: BlogsTable
     Properties:
-      FunctionName: CreateBlog
+      FunctionName: !Sub '${AWS::StackName}-lambda-CreateBlog'
       Handler: src/handlers/createBlog.handler
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BlogsTable
       Events:
-        BlogsApi:
+        ApiEvent:
           Type: HttpApi
           Properties:
             Path: /blogs
-            Method: POST        
+            Method: POST  
+            ApiId: !Ref HttpApi
   
   UpdateBlogFunction:
     Type: AWS::Serverless::Function
     DependsOn: BlogsTable
     Properties:
-      FunctionName: UpdateBlog
+      FunctionName: !Sub '${AWS::StackName}-lambda-UpdateBlog'
       Handler: src/handlers/updateBlog.handler
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BlogsTable
       Events:
-        BlogsApi:
+        ApiEvent:
           Type: HttpApi
           Properties:
             Path: /blogs/{id}
             Method: PATCH
+            ApiId: !Ref HttpApi
 
   DeleteBlogFunction:
     Type: AWS::Serverless::Function
     DependsOn: BlogsTable
     Properties:
-      FunctionName: DeleteBlog
+      FunctionName: !Sub '${AWS::StackName}-lambda-DeleteBlog'
       Handler: src/handlers/deleteBlog.handler
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BlogsTable
       Events:
-        BlogsApi:
+        ApiEvent:
           Type: HttpApi
           Properties:
             Path: /blogs/{id}
             Method: DELETE
-            
+            ApiId: !Ref HttpApi
+
   BlogsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub 'Blogs-${EnvironmentMode}'
+      TableName: !Sub '${AWS::StackName}-table-Blogs'
+      BillingMode: PAY_PER_REQUEST 
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
         - AttributeName: createdAt
           AttributeType: S
         - AttributeName: updatedAt
-          AttributeType: S
-        - AttributeName: title
-          AttributeType: S
-        - AttributeName: body
           AttributeType: S
       KeySchema:
         - AttributeName: id
@@ -130,9 +138,6 @@ Resources:
             KeyType: RANGE
           Projection:
             ProjectionType: ALL
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
         - IndexName: BlogsDevGSI-2
           KeySchema:
           - AttributeName: id
@@ -141,9 +146,8 @@ Resources:
             KeyType: RANGE
           Projection:
             ProjectionType: ALL
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
+            
+Outputs:
+  ApiUrl:
+    Description: API Url
+    Value: !Sub 'https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com/${EnvironmentMode}'

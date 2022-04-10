@@ -9,18 +9,13 @@ class BlogsRepository {
 	async getBlogs() {
 		const result = await this.#repository.scan({ TableName: this.#tableName }).promise();
 
-		return {
-			data: result.Items,
-			count: result.Count,
-		};
+		return { data: result.Items, count: result.Count };
 	}
 
 	async getBlog(id) {
 		const result = await this.#repository.get({ TableName: this.#tableName, Key: { id } }).promise();
 
-		return {
-			data: result.Item,
-		};
+		return { data: result.Item };
 	}
 
 	async createBlog(content) {
@@ -32,15 +27,18 @@ class BlogsRepository {
 					createdAt: new Date().toISOString(),
 					...content,
 				},
+				ReturnValues: "NONE",
 			})
 			.promise();
 
-		return {
-			data: result.Attributes,
-		};
+		return { data: result.Attributes };
 	}
 
 	async updateBlog(id, content) {
+		const { Item } = await this.#repository.get({ TableName: this.#tableName, Key: { id } }).promise();
+
+		if (!Item) return { data: null };
+
 		const result = await this.#repository
 			.update({
 				TableName: this.#tableName,
@@ -67,9 +65,7 @@ class BlogsRepository {
 			})
 			.promise();
 
-		return {
-			data: result.Attributes,
-		};
+		return { data: result.Attributes };
 	}
 
 	async deleteBlog(id) {
@@ -81,9 +77,7 @@ class BlogsRepository {
 			})
 			.promise();
 
-		return {
-			data: result.Attributes,
-		};
+		return { data: result.Attributes };
 	}
 }
 

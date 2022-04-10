@@ -2,27 +2,12 @@ const { object, string } = require("yup");
 const validator = require("validator");
 
 const createBlogBodySchema = object({
-	title: string()
-		.required()
-		.trim()
-		.min(1)
-		.max(64)
-		.label("Title")
-		.test("test-title", "Title must be alphanumeric", function (value) {
-			return typeof value === "string" && validator.isAlphanumeric(value);
-		}),
+	title: string().required().trim().min(1).max(64).label("Title"),
 	body: string().required().min(1).max(512).label("Body"),
 });
 
 const updateBlogBodySchema = object({
-	title: string()
-		.trim()
-		.min(1)
-		.max(64)
-		.label("Title")
-		.test("test-title", "Title must be alphanumeric", function (value) {
-			return typeof value === "undefined" || (typeof value === "string" && validator.isAlphanumeric(value));
-		}),
+	title: string().trim().min(1).max(64).label("Title"),
 	body: string().min(1).max(512).label("Body"),
 });
 

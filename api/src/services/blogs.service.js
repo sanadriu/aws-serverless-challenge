@@ -31,9 +31,9 @@ class BlogsService {
 
 	async createBlog(content) {
 		try {
-			const result = await this.#blogsRepository.createBlog(content);
+			await this.#blogsRepository.createBlog(content);
 
-			return this.#blogsResults.blogCreated(result);
+			return this.#blogsResults.blogCreated();
 		} catch (error) {
 			return this.#blogsResults.unexpected(error.message);
 		}
@@ -45,7 +45,7 @@ class BlogsService {
 
 			if (!result.data) return this.#blogsResults.blogNotFound();
 
-			return this.#blogsResults.blogUpdated(result);
+			return this.#blogsResults.blogUpdated();
 		} catch (error) {
 			return this.#blogsResults.unexpected(error.message);
 		}
@@ -57,7 +57,7 @@ class BlogsService {
 
 			if (!result.data) return this.#blogsResults.blogNotFound();
 
-			return this.#blogsResults.blogDeleted(result);
+			return this.#blogsResults.blogDeleted();
 		} catch (error) {
 			return this.#blogsResults.unexpected(error.message);
 		}

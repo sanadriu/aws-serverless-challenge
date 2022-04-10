@@ -15,27 +15,24 @@ class BlogsResults {
 		};
 	}
 
-	blogCreated(result) {
+	blogCreated() {
 		return {
-			result,
 			message: "Blog has been created successfully",
 			success: true,
 			httpStatusCode: 201,
 		};
 	}
 
-	blogUpdated(result) {
+	blogUpdated() {
 		return {
-			result,
 			message: "Blog has been updated successfully",
 			success: true,
 			httpStatusCode: 200,
 		};
 	}
 
-	blogDeleted(result) {
+	blogDeleted() {
 		return {
-			result,
 			message: "Blog has been deleted successfully",
 			success: true,
 			httpStatusCode: 200,
