@@ -1,10 +1,10 @@
 const middy = require("@middy/core");
-const httpErrorHandlerMiddleware = require("../middlewares/httpErrorHandler.middleware");
-const validationMiddleware = require("../middlewares/validation.middleware");
-const BlogsRepository = require("../repositories/blogs.repository");
-const BlogsResults = require("../services/blogs.results");
-const BlogsService = require("../services/blogs.service");
-const { blogParamsSchema } = require("../validation/blogs.validation");
+const httpErrorHandlerMiddleware = require("/opt/nodejs/middlewares/httpErrorHandler.middleware");
+const validationMiddleware = require("/opt/nodejs/resources/middlewares/validation.middleware");
+const BlogsRepository = require("/opt/nodejs/resources/repositories/blogs.repository");
+const BlogsResults = require("/opt/nodejs/resources/services/blogs.results");
+const BlogsService = require("/opt/nodejs/resources/services/blogs.service");
+const { blogParamsSchema } = require("/opt/nodejs/resources/validation/blogs.validation");
 
 const blogsRepository = new BlogsRepository();
 const blogsResults = new BlogsResults();
@@ -21,6 +21,6 @@ const deleteBlog = async (event) => {
 	};
 };
 
-module.exports.handler = middy(deleteBlog)
+exports.handler = middy(deleteBlog)
 	.use(validationMiddleware(blogParamsSchema, "pathParameters"))
 	.use(httpErrorHandlerMiddleware());

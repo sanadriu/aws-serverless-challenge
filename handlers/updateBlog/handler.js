@@ -1,11 +1,11 @@
 const middy = require("@middy/core");
 const jsonBodyParser = require("@middy/http-json-body-parser");
-const httpErrorHandlerMiddleware = require("../middlewares/httpErrorHandler.middleware");
-const validationMiddleware = require("../middlewares/validation.middleware");
-const BlogsRepository = require("../repositories/blogs.repository");
-const BlogsResults = require("../services/blogs.results");
-const BlogsService = require("../services/blogs.service");
-const { updateBlogBodySchema, blogParamsSchema } = require("../validation/blogs.validation");
+const httpErrorHandlerMiddleware = require("/opt/nodejs/resources/middlewares/httpErrorHandler.middleware");
+const validationMiddleware = require("/opt/nodejs/resources/middlewares/validation.middleware");
+const BlogsRepository = require("/opt/nodejs/resources/repositories/blogs.repository");
+const BlogsResults = require("/opt/nodejs/resources/services/blogs.results");
+const BlogsService = require("/opt/nodejs/resources/services/blogs.service");
+const { updateBlogBodySchema, blogParamsSchema } = require("/opt/nodejs/resources/validation/blogs.validation");
 
 const blogsRepository = new BlogsRepository();
 const blogsResults = new BlogsResults();
@@ -23,7 +23,7 @@ const updateBlog = async (event) => {
 	};
 };
 
-module.exports.handler = middy(updateBlog)
+exports.handler = middy(updateBlog)
 	.use(jsonBodyParser())
 	.use(validationMiddleware(blogParamsSchema, "pathParameters"))
 	.use(validationMiddleware(updateBlogBodySchema, "body"))

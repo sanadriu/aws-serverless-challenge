@@ -18,7 +18,6 @@ Globals:
   Function:
     Timeout: 15
     Runtime: nodejs14.x
-    CodeUri: api/
     Architectures:
       - x86_64
     Environment:
@@ -84,12 +83,40 @@ Resources:
                 - !Ref UserPoolClient
             IdentitySource: "$request.header.Authorization"
 
+  Layer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      CompatibleRuntimes: 
+        - nodejs14.x
+      ContentUri: layer
+      LayerName: !Sub '${AWS::StackName}-layer'
+      RetentionPolicy: Delete
+
+  GetUserClaims:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-lambda-GetUserClaims'
+      CodeUri: handlers/getUserClaims
+      Handler: handler.handler
+      Layers:
+        - !Ref Layer
+      Events:
+        ApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /claims
+            Method: GET
+            ApiId: !Ref HttpApi
+
   GetBlogsFunction:
     Type: AWS::Serverless::Function
     DependsOn: BlogsTable
     Properties:
       FunctionName: !Sub '${AWS::StackName}-lambda-GetBlogs'
-      Handler: src/handlers/getBlogs.handler
+      CodeUri: handlers/getBlogs
+      Handler: handler.handler
+      Layers:
+        - !Ref Layer
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BlogsTable
@@ -105,7 +132,10 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Sub '${AWS::StackName}-lambda-GetBlog'
-      Handler: src/handlers/getBlog.handler
+      CodeUri: handlers/getBlog
+      Handler: handler.handler
+      Layers:
+        - !Ref Layer
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BlogsTable
@@ -122,7 +152,10 @@ Resources:
     DependsOn: BlogsTable
     Properties:
       FunctionName: !Sub '${AWS::StackName}-lambda-CreateBlog'
-      Handler: src/handlers/createBlog.handler
+      CodeUri: handlers/createBlog
+      Handler: handler.handler
+      Layers:
+        - !Ref Layer
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BlogsTable
@@ -141,7 +174,10 @@ Resources:
     DependsOn: BlogsTable
     Properties:
       FunctionName: !Sub '${AWS::StackName}-lambda-UpdateBlog'
-      Handler: src/handlers/updateBlog.handler
+      CodeUri: handlers/updateBlog
+      Handler: handler.handler
+      Layers:
+        - !Ref Layer
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BlogsTable
@@ -160,7 +196,10 @@ Resources:
     DependsOn: BlogsTable
     Properties:
       FunctionName: !Sub '${AWS::StackName}-lambda-DeleteBlog'
-      Handler: src/handlers/deleteBlog.handler
+      CodeUri: handlers/deleteBlog
+      Handler: handler.handler
+      Layers:
+        - !Ref Layer
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BlogsTable

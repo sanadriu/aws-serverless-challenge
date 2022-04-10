@@ -1,8 +1,8 @@
 const middy = require("@middy/core");
-const httpErrorHandlerMiddleware = require("../middlewares/httpErrorHandler.middleware");
-const BlogsRepository = require("../repositories/blogs.repository");
-const BlogsResults = require("../services/blogs.results");
-const BlogsService = require("../services/blogs.service");
+const httpErrorHandlerMiddleware = require("/opt/nodejs/resources/middlewares/httpErrorHandler.middleware");
+const BlogsRepository = require("/opt/nodejs/resources/repositories/blogs.repository");
+const BlogsResults = require("/opt/nodejs/resources/services/blogs.results");
+const BlogsService = require("/opt/nodejs/resources/services/blogs.service");
 
 const blogsRepository = new BlogsRepository();
 const blogsResults = new BlogsResults();
@@ -17,4 +17,4 @@ const getBlogs = async (event) => {
 	};
 };
 
-module.exports.handler = middy(getBlogs).use(httpErrorHandlerMiddleware({}));
+exports.handler = middy(getBlogs).use(httpErrorHandlerMiddleware({}));

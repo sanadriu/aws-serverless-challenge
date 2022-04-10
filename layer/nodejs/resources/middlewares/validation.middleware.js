@@ -1,5 +1,5 @@
+const createHttpError = require("http-errors");
 const { ValidationError } = require("yup");
-const createError = require("http-errors");
 
 function validationMiddleware(schema, property) {
 	const before = async (request) => {
@@ -17,14 +17,9 @@ function validationMiddleware(schema, property) {
 					reasons[path] = reasons[path] || message;
 				});
 
-				throw new createError(400, {
-					message: "Validation failed",
-					reasons,
-				});
+				throw new createHttpError(400, { message: "Validation failed", reasons });
 			} else {
-				throw new createError(500, {
-					message: error.message,
-				});
+				throw new createHttpError(500, { message: error.message });
 			}
 		}
 	};
