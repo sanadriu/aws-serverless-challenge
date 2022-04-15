@@ -1,4 +1,5 @@
-stuff
+others
 node_modules
 samconfig.toml
 requests*
+.env*

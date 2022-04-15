@@ -22,14 +22,18 @@ Globals:
       - x86_64
     Environment:
       Variables:
-        tableName: !Ref BlogsTable
-        mode: !Ref EnvironmentMode
+        blogsIndexNameCreatedAt: "BlogsGSI-1"
+        blogsIndexNameUpdatedAt: "BlogsGSI-2"
+        blogsTableName: "Blogs"
+        mode: 
+          Ref: EnvironmentMode
 
 Resources:
   UserPool:
     Type: AWS::Cognito::UserPool
     Properties:
-      UserPoolName: !Sub '${AWS::StackName}-user-pool'
+      UserPoolName: 
+        Fn::Sub: '${AWS::StackName}-user-pool-${EnvironmentMode}'
       Policies:
         PasswordPolicy:
           MinimumLength: 8
@@ -45,8 +49,10 @@ Resources:
   UserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
-      UserPoolId: !Ref UserPool
-      ClientName: !Sub '${AWS::StackName}-user-pool-client'
+      UserPoolId: 
+        Ref: UserPool
+      ClientName: 
+        Fn::Sub: '${AWS::StackName}-user-pool-client-${EnvironmentMode}'
       GenerateSecret: false
       SupportedIdentityProviders:
         - COGNITO
@@ -58,29 +64,36 @@ Resources:
         - email
         - openid
         - profile
-      CallbackURLs: !Ref ClientURLs
-      LogoutURLs: !Ref ClientURLs
+      CallbackURLs: 
+        Ref: ClientURLs
+      LogoutURLs: 
+        Ref: ClientURLs
 
   UserPoolDomain:
     Type: AWS::Cognito::UserPoolDomain
     Properties:
-      UserPoolId: !Ref UserPool
-      Domain: !Ref AWS::AccountId
+      UserPoolId: 
+        Ref: UserPool
+      Domain: 
+        Ref: AWS::AccountId
 
   HttpApi:
     Type: AWS::Serverless::HttpApi
     Properties:
-      StageName: !Ref EnvironmentMode
-      Description: !Sub 'HTTP Serverless API for ${EnvironmentMode} stage'
+      StageName: 
+        Ref: EnvironmentMode
+      Description: 
+        Fn::Sub: 'HTTP Serverless API for ${EnvironmentMode} stage'
       Auth:
         Authorizers:
           Cognito:
             AuthorizationScopes:
               - email
             JwtConfiguration:
-              issuer: !Sub 'https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPool}'
+              issuer: 
+                Fn::Sub: 'https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPool}'
               audience: 
-                - !Ref UserPoolClient
+                - Ref: UserPoolClient
             IdentitySource: "$request.header.Authorization"
 
   Layer:
@@ -88,84 +101,96 @@ Resources:
     Properties:
       CompatibleRuntimes: 
         - nodejs14.x
-      ContentUri: layer
-      LayerName: !Sub '${AWS::StackName}-layer'
+      ContentUri: src/layer
+      LayerName: 
+        Fn::Sub: '${AWS::StackName}-layer-${EnvironmentMode}'
       RetentionPolicy: Delete
 
   GetUserClaims:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub '${AWS::StackName}-lambda-GetUserClaims'
-      CodeUri: handlers/getUserClaims
+      FunctionName: 
+        Fn::Sub: '${AWS::StackName}-lambda-GetUserClaims-${EnvironmentMode}'
+      CodeUri: src/handlers/getUserClaims
       Handler: handler.handler
       Layers:
-        - !Ref Layer
+        - Ref: Layer
       Events:
         ApiEvent:
           Type: HttpApi
           Properties:
             Path: /claims
             Method: GET
-            ApiId: !Ref HttpApi
+            ApiId: 
+              Ref: HttpApi
 
   GetBlogsFunction:
     Type: AWS::Serverless::Function
     DependsOn: BlogsTable
     Properties:
-      FunctionName: !Sub '${AWS::StackName}-lambda-GetBlogs'
-      CodeUri: handlers/getBlogs
+      FunctionName: 
+        Fn::Sub: '${AWS::StackName}-lambda-GetBlogs-${EnvironmentMode}'
+      CodeUri: src/handlers/getBlogs
       Handler: handler.handler
       Layers:
-        - !Ref Layer
+        - Ref: Layer
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref BlogsTable
+            TableName: 
+              Ref: BlogsTable
       Events:
         ApiEvent:
           Type: HttpApi
           Properties:
             Path: /blogs
             Method: GET
-            ApiId: !Ref HttpApi
+            ApiId: 
+              Ref: HttpApi
 
   GetBlogFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub '${AWS::StackName}-lambda-GetBlog'
-      CodeUri: handlers/getBlog
+      FunctionName: 
+        Fn::Sub: '${AWS::StackName}-lambda-GetBlog-${EnvironmentMode}'
+      CodeUri: src/handlers/getBlog
       Handler: handler.handler
       Layers:
-        - !Ref Layer
+        - Ref: Layer
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref BlogsTable
+            TableName: 
+              Ref: BlogsTable
       Events:
         ApiEvent:
           Type: HttpApi
           Properties:
             Path: /blogs/{id}
             Method: GET
-            ApiId: !Ref HttpApi
+            ApiId: 
+              Ref: HttpApi
 
   CreateBlogFunction:
     Type: AWS::Serverless::Function
     DependsOn: BlogsTable
     Properties:
-      FunctionName: !Sub '${AWS::StackName}-lambda-CreateBlog'
-      CodeUri: handlers/createBlog
+      FunctionName: 
+        Fn::Sub: '${AWS::StackName}-lambda-CreateBlog-${EnvironmentMode}'
+      CodeUri: src/handlers/createBlog
       Handler: handler.handler
       Layers:
-        - !Ref Layer
+        - Ref: Layer
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref BlogsTable
+            TableName: 
+              Ref: BlogsTable
       Events:
         ApiEvent:
           Type: HttpApi
           Properties:
             Path: /blogs
             Method: POST  
-            ApiId: !Ref HttpApi
+            ApiId: 
+              Ref: HttpApi
             Auth:
               Authorizer: Cognito
   
@@ -173,21 +198,24 @@ Resources:
     Type: AWS::Serverless::Function
     DependsOn: BlogsTable
     Properties:
-      FunctionName: !Sub '${AWS::StackName}-lambda-UpdateBlog'
-      CodeUri: handlers/updateBlog
+      FunctionName: 
+        Fn::Sub: '${AWS::StackName}-lambda-UpdateBlog-${EnvironmentMode}'
+      CodeUri: src/handlers/updateBlog
       Handler: handler.handler
       Layers:
-        - !Ref Layer
+        - Ref: Layer
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref BlogsTable
+            TableName: 
+              Ref: BlogsTable
       Events:
         ApiEvent:
           Type: HttpApi
           Properties:
             Path: /blogs/{id}
             Method: PATCH
-            ApiId: !Ref HttpApi
+            ApiId: 
+              Ref: HttpApi
             Auth:
               Authorizer: Cognito
 
@@ -195,28 +223,32 @@ Resources:
     Type: AWS::Serverless::Function
     DependsOn: BlogsTable
     Properties:
-      FunctionName: !Sub '${AWS::StackName}-lambda-DeleteBlog'
-      CodeUri: handlers/deleteBlog
+      FunctionName: 
+        Fn::Sub: '${AWS::StackName}-lambda-DeleteBlog-${EnvironmentMode}'
+      CodeUri: src/handlers/deleteBlog
       Handler: handler.handler
       Layers:
-        - !Ref Layer
+        - Ref: Layer
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref BlogsTable
+            TableName: 
+              Ref: BlogsTable
       Events:
         ApiEvent:
           Type: HttpApi
           Properties:
             Path: /blogs/{id}
             Method: DELETE
-            ApiId: !Ref HttpApi
+            ApiId: 
+              Ref: HttpApi
             Auth:
               Authorizer: Cognito
 
   BlogsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub '${AWS::StackName}-table-Blogs'
+      TableName: 
+        Fn::Sub: '${AWS::StackName}-table-Blogs-${EnvironmentMode}'
       BillingMode: PAY_PER_REQUEST 
       AttributeDefinitions:
         - AttributeName: id
@@ -225,21 +257,23 @@ Resources:
           AttributeType: S
         - AttributeName: updatedAt
           AttributeType: S
+        - AttributeName: type
+          AttributeType: S
       KeySchema:
         - AttributeName: id
           KeyType: HASH
       GlobalSecondaryIndexes:
-        - IndexName: BlogsDevGSI-1
+        - IndexName: BlogsGSI-1
           KeySchema:
-          - AttributeName: id
+          - AttributeName: type
             KeyType: HASH
           - AttributeName: createdAt
             KeyType: RANGE
           Projection:
             ProjectionType: ALL
-        - IndexName: BlogsDevGSI-2
+        - IndexName: BlogsGSI-2
           KeySchema:
-          - AttributeName: id
+          - AttributeName: type
             KeyType: HASH
           - AttributeName: updatedAt
             KeyType: RANGE
@@ -249,16 +283,20 @@ Resources:
 Outputs:
   UserPoolId: 
     Description: User pool ID
-    Value: !Ref UserPool
+    Value: 
+      Ref: UserPool
 
   UserPoolClientId:
     Description: User pool client application ID
-    Value: !Ref UserPoolClient
+    Value: 
+      Ref: UserPoolClient
 
   AuthUrl:
     Description: Authentication URL
-    Value: !Sub 'https://${UserPoolDomain}.auth.${AWS::Region}.amazoncognito.com'
+    Value: 
+      Fn::Sub: 'https://${UserPoolDomain}.auth.${AWS::Region}.amazoncognito.com'
 
   ApiUrl:
     Description: API Url
-    Value: !Sub 'https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com/${EnvironmentMode}'
+    Value: 
+      Fn::Sub: 'https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com/${EnvironmentMode}'

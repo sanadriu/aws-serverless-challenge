@@ -1,0 +1,15 @@
+{
+	"dependencies": {
+		"@middy/core": "^2.5.7",
+		"@middy/http-error-handler": "^2.5.7",
+		"@middy/http-json-body-parser": "^2.5.7",
+		"@faker-js/faker": "^6.1.2",
+		"aws-sdk": "^2.1110.0",
+		"cloudformation-js-yaml-schema": "^0.4.2",
+		"http-errors": "^2.0.0",
+		"jsonwebtoken": "^8.5.1",
+		"uuid": "^8.3.2",
+		"validator": "^13.7.0",
+		"yup": "^0.32.11"
+	}
+}
