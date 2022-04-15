@@ -3,7 +3,7 @@ const dynamoDB = require("../../databases/dynamoDB");
 const createTableInputs = require("../../databases/dynamoDB.tables");
 const { createTables, deleteTables, deleteTableData } = require("../../databases/dynamoDB.utils");
 const { generateDatabaseBlogs, generateBlogContent, generateDatabaseBlog } = require("../../seeders/blogs.seeder");
-const { toBeUUIDv4, toBeDate, toBeOptionalDate } = require("../../matchers");
+const { toBeUUIDv4, toBeDate, toBeOptionalDate } = require("../../helpers/jest");
 
 const BlogsRepository = require("../blogs.repository");
 

@@ -4,7 +4,7 @@ const {
 	generateDatabaseBlog,
 	generateDatabaseBlogs,
 } = require("../blogs.seeder");
-const { toBeUUIDv4, toBeDate, toBeOptionalDate } = require("../../matchers");
+const { toBeUUIDv4, toBeDate, toBeOptionalDate } = require("../../helpers/jest");
 
 expect.extend({
 	toBeUUIDv4,
