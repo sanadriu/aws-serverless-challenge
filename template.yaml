@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
-Description: "Serverless AWS Challenge: Blogs API"
+Description: "Serverless AWS Challenge: Blogs API (Adrian)"
 
 Parameters:
   EnvironmentMode:
@@ -22,18 +22,49 @@ Globals:
       - x86_64
     Environment:
       Variables:
-        blogsIndexNameCreatedAt: "BlogsGSI-1"
-        blogsIndexNameUpdatedAt: "BlogsGSI-2"
-        blogsTableName: "Blogs"
         mode: 
           Ref: EnvironmentMode
-
+        blogsTableName:
+          Fn::GetAtt: [ BlogsTableName, Value ]
+        blogsIdxCreatedAt: 
+          Fn::GetAtt: [ BlogsTableIdxCreatedAt, Value ]
+        blogsIdxUpdatedAt:
+          Fn::GetAtt: [ BlogsTableIdxUpdatedAt, Value ]
+        
 Resources:
+  BlogsTableName:
+    Type: AWS::SSM::Parameter
+    Properties: 
+      Name: /blogs-api/table/name
+      Tier: Standard
+      DataType: text
+      Type: String
+      Value: 
+        Fn::Sub: '${AWS::StackName}-BlogsTable' 
+
+  BlogsTableIdxCreatedAt:
+    Type: AWS::SSM::Parameter
+    Properties: 
+      Name: /blogs-api/table/idx-createdAt
+      Tier: Standard
+      DataType: text
+      Type: String
+      Value: BlogsTable-idx-createdAt
+
+  BlogsTableIdxUpdatedAt:
+    Type: AWS::SSM::Parameter
+    Properties: 
+      Name: /blogs-api/table/idx-updatedAt
+      Tier: Standard
+      DataType: text
+      Type: String
+      Value: BlogsTable-idx-updatedAt
+
   UserPool:
     Type: AWS::Cognito::UserPool
     Properties:
       UserPoolName: 
-        Fn::Sub: '${AWS::StackName}-user-pool-${EnvironmentMode}'
+        Fn::Sub: '${AWS::StackName}-UserPool'
       Policies:
         PasswordPolicy:
           MinimumLength: 8
@@ -52,7 +83,7 @@ Resources:
       UserPoolId: 
         Ref: UserPool
       ClientName: 
-        Fn::Sub: '${AWS::StackName}-user-pool-client-${EnvironmentMode}'
+        Fn::Sub: '${AWS::StackName}-AppClient'
       GenerateSecret: false
       SupportedIdentityProviders:
         - COGNITO
@@ -75,7 +106,7 @@ Resources:
       UserPoolId: 
         Ref: UserPool
       Domain: 
-        Ref: AWS::AccountId
+        Fn::Sub: '${AWS::StackName}-${AWS::AccountId}'
 
   HttpApi:
     Type: AWS::Serverless::HttpApi
@@ -103,14 +134,14 @@ Resources:
         - nodejs14.x
       ContentUri: src/layer
       LayerName: 
-        Fn::Sub: '${AWS::StackName}-layer-${EnvironmentMode}'
+        Fn::Sub: '${AWS::StackName}-deps'
       RetentionPolicy: Delete
 
   GetUserClaims:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: 
-        Fn::Sub: '${AWS::StackName}-lambda-GetUserClaims-${EnvironmentMode}'
+        Fn::Sub: '${AWS::StackName}-GetUserClaims'
       CodeUri: src/handlers/getUserClaims
       Handler: handler.handler
       Layers:
@@ -129,7 +160,7 @@ Resources:
     DependsOn: BlogsTable
     Properties:
       FunctionName: 
-        Fn::Sub: '${AWS::StackName}-lambda-GetBlogs-${EnvironmentMode}'
+        Fn::Sub: '${AWS::StackName}-GetBlogs'
       CodeUri: src/handlers/getBlogs
       Handler: handler.handler
       Layers:
@@ -151,7 +182,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: 
-        Fn::Sub: '${AWS::StackName}-lambda-GetBlog-${EnvironmentMode}'
+        Fn::Sub: '${AWS::StackName}-GetBlog'
       CodeUri: src/handlers/getBlog
       Handler: handler.handler
       Layers:
@@ -174,7 +205,7 @@ Resources:
     DependsOn: BlogsTable
     Properties:
       FunctionName: 
-        Fn::Sub: '${AWS::StackName}-lambda-CreateBlog-${EnvironmentMode}'
+        Fn::Sub: '${AWS::StackName}-CreateBlog'
       CodeUri: src/handlers/createBlog
       Handler: handler.handler
       Layers:
@@ -199,7 +230,7 @@ Resources:
     DependsOn: BlogsTable
     Properties:
       FunctionName: 
-        Fn::Sub: '${AWS::StackName}-lambda-UpdateBlog-${EnvironmentMode}'
+        Fn::Sub: '${AWS::StackName}-UpdateBlog'
       CodeUri: src/handlers/updateBlog
       Handler: handler.handler
       Layers:
@@ -224,7 +255,7 @@ Resources:
     DependsOn: BlogsTable
     Properties:
       FunctionName: 
-        Fn::Sub: '${AWS::StackName}-lambda-DeleteBlog-${EnvironmentMode}'
+        Fn::Sub: '${AWS::StackName}-DeleteBlog'
       CodeUri: src/handlers/deleteBlog
       Handler: handler.handler
       Layers:
@@ -248,7 +279,7 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: 
-        Fn::Sub: '${AWS::StackName}-table-Blogs-${EnvironmentMode}'
+        Fn::GetAtt: [ BlogsTableName, Value ]
       BillingMode: PAY_PER_REQUEST 
       AttributeDefinitions:
         - AttributeName: id
@@ -263,7 +294,8 @@ Resources:
         - AttributeName: id
           KeyType: HASH
       GlobalSecondaryIndexes:
-        - IndexName: BlogsGSI-1
+        - IndexName: 
+            Fn::GetAtt: [ BlogsTableIdxCreatedAt, Value ]
           KeySchema:
           - AttributeName: type
             KeyType: HASH
@@ -271,7 +303,8 @@ Resources:
             KeyType: RANGE
           Projection:
             ProjectionType: ALL
-        - IndexName: BlogsGSI-2
+        - IndexName: 
+            Fn::GetAtt: [ BlogsTableIdxUpdatedAt, Value ]
           KeySchema:
           - AttributeName: type
             KeyType: HASH
@@ -286,7 +319,7 @@ Outputs:
     Value: 
       Ref: UserPool
 
-  UserPoolClientId:
+  AppClientId:
     Description: User pool client application ID
     Value: 
       Ref: UserPoolClient
@@ -300,3 +333,5 @@ Outputs:
     Description: API Url
     Value: 
       Fn::Sub: 'https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com/${EnvironmentMode}'
+
+      

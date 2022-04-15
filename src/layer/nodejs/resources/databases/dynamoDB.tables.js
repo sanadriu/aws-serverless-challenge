@@ -28,7 +28,7 @@ const tables = [
 		],
 		GlobalSecondaryIndexes: [
 			{
-				IndexName: process.env.blogsIndexNameCreatedAt,
+				IndexName: process.env.blogsIdxCreatedAt,
 				KeySchema: [
 					{
 						AttributeName: "type",
@@ -44,7 +44,7 @@ const tables = [
 				},
 			},
 			{
-				IndexName: process.env.blogsIndexNameUpdatedAt,
+				IndexName: process.env.blogsIdxUpdatedAt,
 				KeySchema: [
 					{
 						AttributeName: "type",

@@ -1,29 +1,5 @@
-const path = process.env.path || "/opt/nodejs";
-
-const createHttpError = require("http-errors");
-const jwt = require("jsonwebtoken");
 const middy = require("@middy/core");
-const httpErrorHandlerMiddleware = require(`${path}/resources/middlewares/httpErrorHandler.middleware`);
+const httpErrorHandlerMiddleware = require(`/opt/nodejs/resources/middlewares/httpErrorHandler.middleware`);
+const { handler } = require(`/opt/nodejs/handlers/getUserClaims`);
 
-const getUserClaims = async (event) => {
-	try {
-		if (!event.headers.authorization) {
-			return {
-				statusCode: 200,
-				body: JSON.stringify({ payload: null }),
-			};
-		}
-
-		const token = event.headers.authorization.split(" ")[1];
-		const payload = jwt.decode(token);
-
-		return {
-			statusCode: 200,
-			body: JSON.stringify({ payload }),
-		};
-	} catch (error) {
-		throw createHttpError(500, { message: error.message });
-	}
-};
-
-exports.handler = middy(getUserClaims).use(httpErrorHandlerMiddleware());
+exports.handler = middy(handler).use(httpErrorHandlerMiddleware());

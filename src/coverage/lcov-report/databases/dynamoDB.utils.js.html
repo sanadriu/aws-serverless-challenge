@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.23% </span>
+                <span class="strong">23.52% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/17</span>
+                <span class='fraction'>4/17</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/7</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/14</span>
+                <span class='fraction'>4/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -106,25 +106,25 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -143,26 +143,26 @@
 const config = require("./dynamoDB.config");
 const ddb = new DynamoDB(config);
 &nbsp;
-async function createTables(createTableInputs) {
-	const creation = createTableInputs.map((createTableInput) =&gt; ddb.createTable(createTableInput).promise());
+async function <span class="fstat-no" title="function not covered" >createTables(</span>createTableInputs) {
+	const creation = <span class="cstat-no" title="statement not covered" >createTableInputs.map(<span class="fstat-no" title="function not covered" >(c</span>reateTableInput) =&gt; <span class="cstat-no" title="statement not covered" >ddb.createTable(createTableInput).promise())</span>;</span>
 &nbsp;
-	await Promise.all(creation);
+<span class="cstat-no" title="statement not covered" >	await Promise.all(creation);</span>
 }
 &nbsp;
-async function deleteTables() {
-	const { TableNames } = await ddb.listTables().promise();
+async function <span class="fstat-no" title="function not covered" >deleteTables(</span>) {
+	const { TableNames } = <span class="cstat-no" title="statement not covered" >await ddb.listTables().promise();</span>
 &nbsp;
-	const deletion = TableNames.map((TableName) =&gt; ddb.deleteTable({ TableName }).promise());
+	const deletion = <span class="cstat-no" title="statement not covered" >TableNames.map(<span class="fstat-no" title="function not covered" >(T</span>ableName) =&gt; <span class="cstat-no" title="statement not covered" >ddb.deleteTable({ TableName }).promise())</span>;</span>
 &nbsp;
-	await Promise.all(deletion);
+<span class="cstat-no" title="statement not covered" >	await Promise.all(deletion);</span>
 }
 &nbsp;
-async function deleteTableData(TableName) {
-	const { Items } = await ddb.scan({ TableName }).promise();
+async function <span class="fstat-no" title="function not covered" >deleteTableData(</span>TableName) {
+	const { Items } = <span class="cstat-no" title="statement not covered" >await ddb.scan({ TableName }).promise();</span>
 &nbsp;
-	const dataDeletion = Items.map((Item) =&gt; ddb.deleteItem({ TableName, Key: { id: Item.id } }).promise());
+	const dataDeletion = <span class="cstat-no" title="statement not covered" >Items.map(<span class="fstat-no" title="function not covered" >(I</span>tem) =&gt; <span class="cstat-no" title="statement not covered" >ddb.deleteItem({ TableName, Key: { id: Item.id } }).promise())</span>;</span>
 &nbsp;
-	await Promise.all(dataDeletion);
+<span class="cstat-no" title="statement not covered" >	await Promise.all(dataDeletion);</span>
 }
 &nbsp;
 async function <span class="fstat-no" title="function not covered" >getTableNames(</span>) {
@@ -184,7 +184,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Fri Apr 15 2022 09:20:01 GMT+0200 (hora de verano de Europa central)
+                at Fri Apr 15 2022 15:52:48 GMT+0200 (hora de verano de Europa central)
             </div>
         <script src="../prettify.js"></script>
         <script>

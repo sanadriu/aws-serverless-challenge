@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">59.09% </span>
+                <span class="strong">9.09% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/22</span>
+                <span class='fraction'>2/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.92% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/13</span>
+                <span class='fraction'>0/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">59.09% </span>
+                <span class="strong">9.09% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/22</span>
+                <span class='fraction'>2/22</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -120,25 +120,9 @@
 <a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,10 +135,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -173,14 +173,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const validator = require("validator");
 &nbsp;
-function toBeUUIDv4(received) {
-	pass = typeof received === "string" &amp;&amp; validator.isUUID(received, 4);
-	if (pass) {
-		return {
+function <span class="fstat-no" title="function not covered" >toBeUUIDv4(</span>received) {
+<span class="cstat-no" title="statement not covered" >	pass = typeof received === "string" &amp;&amp; validator.isUUID(received, 4);</span>
+<span class="cstat-no" title="statement not covered" >	if (pass) {</span>
+<span class="cstat-no" title="statement not covered" >		return {</span>
 			pass: true,
 			message: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >`expected ${received} not to be a UUID v4`,</span>
 		};
-	} else <span class="missing-if-branch" title="else path not taken" >E</span>{
+	} else {
 <span class="cstat-no" title="statement not covered" >		return {</span>
 			pass: false,
 			message: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >`expected ${received} to be a UUID v4`,</span>
@@ -188,15 +188,15 @@ function toBeUUIDv4(received) {
 	}
 }
 &nbsp;
-function toBeDate(received) {
-	const dateRegex = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)((-(\d{2}):(\d{2})|Z)?)$/;
-	const pass = typeof received === "string" &amp;&amp; dateRegex.test(received);
-	if (pass) {
-		return {
+function <span class="fstat-no" title="function not covered" >toBeDate(</span>received) {
+	const dateRegex = <span class="cstat-no" title="statement not covered" >/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)((-(\d{2}):(\d{2})|Z)?)$/;</span>
+	const pass = <span class="cstat-no" title="statement not covered" >typeof received === "string" &amp;&amp; dateRegex.test(received);</span>
+<span class="cstat-no" title="statement not covered" >	if (pass) {</span>
+<span class="cstat-no" title="statement not covered" >		return {</span>
 			pass: true,
 			message: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >`expected ${received} not to be a ISO date`,</span>
 		};
-	} else <span class="missing-if-branch" title="else path not taken" >E</span>{
+	} else {
 <span class="cstat-no" title="statement not covered" >		return {</span>
 			pass: false,
 			message: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >`expected ${received} to be a ISO date`,</span>
@@ -204,15 +204,15 @@ function toBeDate(received) {
 	}
 }
 &nbsp;
-function toBeOptionalDate(received) {
-	const dateRegex = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)((-(\d{2}):(\d{2})|Z)?)$/;
-	const pass = received === "never" || (typeof received === "string" &amp;&amp; dateRegex.test(received));
-	if (pass) {
-		return {
+function <span class="fstat-no" title="function not covered" >toBeOptionalDate(</span>received) {
+	const dateRegex = <span class="cstat-no" title="statement not covered" >/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)((-(\d{2}):(\d{2})|Z)?)$/;</span>
+	const pass = <span class="cstat-no" title="statement not covered" >received === "never" || (typeof received === "string" &amp;&amp; dateRegex.test(received));</span>
+<span class="cstat-no" title="statement not covered" >	if (pass) {</span>
+<span class="cstat-no" title="statement not covered" >		return {</span>
 			pass: true,
 			message: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >`expected ${received} not to be an optional ISO date`,</span>
 		};
-	} else <span class="missing-if-branch" title="else path not taken" >E</span>{
+	} else {
 <span class="cstat-no" title="statement not covered" >		return {</span>
 			pass: false,
 			message: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >`expected ${received} to be an optional ISO date`,</span>
@@ -232,7 +232,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Fri Apr 15 2022 09:20:01 GMT+0200 (hora de verano de Europa central)
+                at Fri Apr 15 2022 15:52:48 GMT+0200 (hora de verano de Europa central)
             </div>
         <script src="../prettify.js"></script>
         <script>

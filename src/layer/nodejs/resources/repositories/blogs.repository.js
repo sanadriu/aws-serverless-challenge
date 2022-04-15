@@ -12,9 +12,9 @@ class BlogsRepository {
 	#getSortIndexName(sort) {
 		switch (sort) {
 			case "updatedAt":
-				return process.env.blogsIndexNameUpdatedAt;
+				return process.env.blogsIdxUpdatedAt;
 			case "createdAt":
-				return process.env.blogsIndexNameCreatedAt;
+				return process.env.blogsIdxCreatedAt;
 			default:
 				return undefined;
 		}

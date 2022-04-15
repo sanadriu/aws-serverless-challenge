@@ -1,19 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650007201898" clover="3.2.0">
-  <project timestamp="1650007201899" name="All files">
-    <metrics statements="114" coveredstatements="103" conditionals="57" coveredconditionals="53" methods="41" coveredmethods="34" elements="212" coveredelements="190" complexity="0" loc="114" ncloc="114" packages="5" files="9" classes="9"/>
-    <package name="databases">
+<coverage generated="1650035411612" clover="3.2.0">
+  <project timestamp="1650035411612" name="All files">
+    <metrics statements="174" coveredstatements="163" conditionals="57" coveredconditionals="53" methods="46" coveredmethods="39" elements="277" coveredelements="255" complexity="0" loc="174" ncloc="174" packages="6" files="14" classes="14"/>
+    <package name="handlers">
+      <metrics statements="60" coveredstatements="60" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+      <file name="createBlog.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\handlers\createBlog.js">
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+      </file>
+      <file name="deleteBlog.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\handlers\deleteBlog.js">
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+      </file>
+      <file name="getBlog.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\handlers\getBlog.js">
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+      </file>
+      <file name="getBlogs.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\handlers\getBlogs.js">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+      </file>
+      <file name="updateBlog.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\handlers\updateBlog.js">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="resources.databases">
       <metrics statements="21" coveredstatements="19" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="6"/>
       <file name="dynamoDB.config.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\resources\databases\dynamoDB.config.js">
         <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
       </file>
       <file name="dynamoDB.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\resources\databases\dynamoDB.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
       </file>
       <file name="dynamoDB.tables.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\resources\databases\dynamoDB.tables.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -38,7 +116,7 @@
         <line num="33" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="matchers">
+    <package name="resources.matchers">
       <metrics statements="22" coveredstatements="13" conditionals="13" coveredconditionals="10" methods="9" coveredmethods="3"/>
       <file name="index.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\resources\matchers\index.js">
         <metrics statements="22" coveredstatements="13" conditionals="13" coveredconditionals="10" methods="9" coveredmethods="3"/>
@@ -66,14 +144,14 @@
         <line num="50" count="2" type="stmt"/>
       </file>
     </package>
-    <package name="repositories">
+    <package name="resources.repositories">
       <metrics statements="29" coveredstatements="29" conditionals="30" coveredconditionals="30" methods="6" coveredmethods="6"/>
       <file name="blogs.repository.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\resources\repositories\blogs.repository.js">
         <metrics statements="29" coveredstatements="29" conditionals="30" coveredconditionals="30" methods="6" coveredmethods="6"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
+        <line num="1" count="7" type="stmt"/>
+        <line num="2" count="7" type="stmt"/>
+        <line num="6" count="7" type="stmt"/>
+        <line num="9" count="7" type="stmt"/>
         <line num="13" count="3" type="cond" truecount="3" falsecount="0"/>
         <line num="15" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
@@ -98,35 +176,35 @@
         <line num="99" count="4" type="cond" truecount="4" falsecount="0"/>
         <line num="101" count="2" type="stmt"/>
         <line num="109" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="113" count="2" type="stmt"/>
+        <line num="113" count="7" type="stmt"/>
       </file>
     </package>
-    <package name="seeders">
+    <package name="resources.seeders">
       <metrics statements="8" coveredstatements="8" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
       <file name="blogs.seeder.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\resources\seeders\blogs.seeder.js">
         <metrics statements="8" coveredstatements="8" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="5" count="48" type="stmt"/>
+        <line num="1" count="7" type="stmt"/>
+        <line num="2" count="7" type="stmt"/>
+        <line num="5" count="63" type="stmt"/>
         <line num="12" count="15" type="stmt"/>
-        <line num="16" count="25" type="stmt"/>
-        <line num="18" count="25" type="stmt"/>
-        <line num="28" count="20" type="stmt"/>
-        <line num="31" count="3" type="stmt"/>
+        <line num="16" count="36" type="stmt"/>
+        <line num="18" count="36" type="stmt"/>
+        <line num="28" count="30" type="stmt"/>
+        <line num="31" count="7" type="stmt"/>
       </file>
     </package>
-    <package name="services">
+    <package name="resources.services">
       <metrics statements="34" coveredstatements="34" conditionals="8" coveredconditionals="7" methods="13" coveredmethods="13"/>
       <file name="blogs.results.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\resources\services\blogs.results.js">
         <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="7" coveredmethods="7"/>
         <line num="3" count="5" type="stmt"/>
         <line num="11" count="3" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="53" count="1" type="stmt"/>
-        <line num="62" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="62" count="6" type="stmt"/>
       </file>
       <file name="blogs.service.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\resources\services\blogs.service.js">
         <metrics statements="26" coveredstatements="26" conditionals="6" coveredconditionals="6" methods="6" coveredmethods="6"/>
@@ -155,7 +233,7 @@
         <line num="58" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="60" count="1" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
+        <line num="67" count="6" type="stmt"/>
       </file>
     </package>
   </project>

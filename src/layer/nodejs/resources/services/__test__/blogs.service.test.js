@@ -1,7 +1,7 @@
 const BlogsRepository = require("../../repositories/blogs.repository");
-const { generateBlogContent } = require("../../seeders/blogs.seeder");
 const BlogsResults = require("../blogs.results");
 const BlogsService = require("../blogs.service");
+const { generateBlogContent } = require("../../seeders/blogs.seeder");
 
 const getBlogMock = jest.spyOn(BlogsRepository.prototype, "getBlog");
 const getBlogsMock = jest.spyOn(BlogsRepository.prototype, "getBlogs");
