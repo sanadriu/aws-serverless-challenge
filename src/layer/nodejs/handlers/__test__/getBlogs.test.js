@@ -15,17 +15,28 @@ describe("get-blogs-handler", () => {
 	getBlogsMock.mockImplementation(() => mockResult);
 
 	test("It calls the corresponding service method", async () => {
-		expect.assertions(1);
+		expect.assertions(2);
 
-		await handler();
+		const queryStringParameters = {};
+		const event = {
+			queryStringParameters,
+		};
+
+		await handler(event);
 
 		expect(getBlogsMock).toBeCalledTimes(1);
+		expect(getBlogsMock).toBeCalledWith(queryStringParameters);
 	});
 
 	test("It returns the service result", async () => {
 		expect.assertions(2);
 
-		const result = await handler();
+		const queryStringParameters = {};
+		const event = {
+			queryStringParameters,
+		};
+
+		const result = await handler(event);
 
 		const { statusCode, body } = result;
 		const bodyObj = JSON.parse(body);

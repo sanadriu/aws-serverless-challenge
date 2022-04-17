@@ -7,8 +7,9 @@ const blogsRepository = new BlogsRepository(dynamoDB);
 const blogsResults = new BlogsResults();
 const blogsService = new BlogsService(blogsRepository, blogsResults);
 
-const getBlogs = async () => {
-	const { httpStatusCode, result, success, message } = await blogsService.getBlogs();
+const getBlogs = async (event) => {
+	const params = event.queryStringParameters;
+	const { httpStatusCode, result, success, message } = await blogsService.getBlogs(params);
 
 	return {
 		statusCode: httpStatusCode,

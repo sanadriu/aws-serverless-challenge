@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650053438788" clover="3.2.0">
-  <project timestamp="1650053438788" name="All files">
-    <metrics statements="174" coveredstatements="163" conditionals="57" coveredconditionals="51" methods="46" coveredmethods="39" elements="277" coveredelements="253" complexity="0" loc="174" ncloc="174" packages="6" files="14" classes="14"/>
+<coverage generated="1650183961789" clover="3.2.0">
+  <project timestamp="1650183961789" name="All files">
+    <metrics statements="175" coveredstatements="164" conditionals="57" coveredconditionals="53" methods="46" coveredmethods="39" elements="278" coveredelements="256" complexity="0" loc="175" ncloc="175" packages="6" files="14" classes="14"/>
     <package name="handlers">
-      <metrics statements="60" coveredstatements="60" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+      <metrics statements="61" coveredstatements="61" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
       <file name="createBlog.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\handlers\createBlog.js">
         <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -50,7 +50,7 @@
         <line num="24" count="1" type="stmt"/>
       </file>
       <file name="getBlogs.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\handlers\getBlogs.js">
-        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -60,8 +60,9 @@
         <line num="8" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
       </file>
       <file name="updateBlog.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\handlers\updateBlog.js">
         <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -117,9 +118,9 @@
       </file>
     </package>
     <package name="resources.helpers">
-      <metrics statements="22" coveredstatements="13" conditionals="13" coveredconditionals="8" methods="9" coveredmethods="3"/>
+      <metrics statements="22" coveredstatements="13" conditionals="13" coveredconditionals="10" methods="9" coveredmethods="3"/>
       <file name="jest.js" path="C:\Users\skual\Documents\Otros\aws-serverless-challenge\src\layer\nodejs\resources\helpers\jest.js">
-        <metrics statements="22" coveredstatements="13" conditionals="13" coveredconditionals="8" methods="9" coveredmethods="3"/>
+        <metrics statements="22" coveredstatements="13" conditionals="13" coveredconditionals="10" methods="9" coveredmethods="3"/>
         <line num="1" count="2" type="stmt"/>
         <line num="4" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="5" count="4" type="cond" truecount="1" falsecount="1"/>
@@ -135,7 +136,7 @@
         <line num="27" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
         <line num="35" count="3" type="stmt"/>
-        <line num="36" count="3" type="cond" truecount="1" falsecount="2"/>
+        <line num="36" count="3" type="cond" truecount="3" falsecount="0"/>
         <line num="37" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="38" count="3" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
