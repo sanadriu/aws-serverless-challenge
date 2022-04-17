@@ -1,0 +1,631 @@
+{
+	"info": {
+		"_postman_id": "386119d6-a114-423d-8245-b475d2f3280e",
+		"name": "AWS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Blog",
+			"item": [
+				{
+					"name": "Get Blog",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs/{{id}}",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Blog (Not found)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs/{{none-id}}",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs",
+								"{{none-id}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Blog (Wrong ID)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs/foo",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs",
+								"foo"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Blogs",
+			"item": [
+				{
+					"name": "Get Blogs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Blogs (Sort by updatedAt)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs?sort=updatedAt",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "updatedAt"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Blogs (Sort by createdAt)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs?sort=createdAt",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "createdAt"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create Blog",
+			"item": [
+				{
+					"name": "Create Blog",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Lorem Ipsum\",\r\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id ipsum eu turpis pharetra feugiat. Aenean convallis vel tortor sit amet hendrerit. Phasellus sodales ipsum vel augue blandit convallis. Vivamus vel ullamcorper libero. Duis id diam suscipit, feugiat magna non, venenatis erat. Praesent at orci id odio fermentum elementum. Donec ullamcorper ultricies sollicitudin.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Blog (Missing token)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Lorem Ipsum\",\r\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id ipsum eu turpis pharetra feugiat. Aenean convallis vel tortor sit amet hendrerit. Phasellus sodales ipsum vel augue blandit convallis. Vivamus vel ullamcorper libero. Duis id diam suscipit, feugiat magna non, venenatis erat. Praesent at orci id odio fermentum elementum. Donec ullamcorper ultricies sollicitudin.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Blog (Incomplete body)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Lorem Ipsum\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update Blog",
+			"item": [
+				{
+					"name": "Update Blog",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Lorem\",\r\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id ipsum eu turpis pharetra feugiat. Aenean convallis vel tortor sit amet hendrerit. Phasellus sodales ipsum vel augue blandit convallis. Vivamus vel ullamcorper libero. Duis id diam suscipit, feugiat magna non, venenatis erat. Praesent at orci id odio fermentum elementum. Donec ullamcorper ultricies sollicitudin.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs/{{id}}",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Blog (Missing token)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Lorem Ipsum\",\r\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id ipsum eu turpis pharetra feugiat. Aenean convallis vel tortor sit amet hendrerit. Phasellus sodales ipsum vel augue blandit convallis. Vivamus vel ullamcorper libero. Duis id diam suscipit, feugiat magna non, venenatis erat. Praesent at orci id odio fermentum elementum. Donec ullamcorper ultricies sollicitudin.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs/{{id}}",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Blog (Not found)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Lorem Ipsum\",\r\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id ipsum eu turpis pharetra feugiat. Aenean convallis vel tortor sit amet hendrerit. Phasellus sodales ipsum vel augue blandit convallis. Vivamus vel ullamcorper libero. Duis id diam suscipit, feugiat magna non, venenatis erat. Praesent at orci id odio fermentum elementum. Donec ullamcorper ultricies sollicitudin.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs/{{none-id}}",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs",
+								"{{none-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Blog (Wrong ID)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Lorem Ipsum\",\r\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id ipsum eu turpis pharetra feugiat. Aenean convallis vel tortor sit amet hendrerit. Phasellus sodales ipsum vel augue blandit convallis. Vivamus vel ullamcorper libero. Duis id diam suscipit, feugiat magna non, venenatis erat. Praesent at orci id odio fermentum elementum. Donec ullamcorper ultricies sollicitudin.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs/foo",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs",
+								"foo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Blog (Missing ID)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Lorem Ipsum\",\r\n    \"body\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id ipsum eu turpis pharetra feugiat. Aenean convallis vel tortor sit amet hendrerit. Phasellus sodales ipsum vel augue blandit convallis. Vivamus vel ullamcorper libero. Duis id diam suscipit, feugiat magna non, venenatis erat. Praesent at orci id odio fermentum elementum. Donec ullamcorper ultricies sollicitudin.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete Blog",
+			"item": [
+				{
+					"name": "Delete Blog",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs/{{id}}",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Blog (Missing token)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs/{{id}}",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Blog (Not found)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs/{{none-id}}",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs",
+								"{{none-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Blog (Wrong ID)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs/foo",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs",
+								"foo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Blog (Missing ID)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/{{api-stage}}/blogs",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"{{api-stage}}",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "authUrl",
+				"value": "{{auth-url}}/oauth2/authorize",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "implicit",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "Token",
+				"type": "string"
+			},
+			{
+				"key": "tokenType",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "accessToken",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "scope",
+				"value": "email profile openid",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{app-client-id}}",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "https://{{user-pool-domain}}/oauth2/token",
+				"type": "string"
+			},
+			{
+				"key": "redirect_uri",
+				"value": "{{redirect-url}}",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "app-client-id",
+			"value": "249oiebbgd98f04j2jqr24imi8",
+			"type": "string"
+		},
+		{
+			"key": "auth-url",
+			"value": "https://blogs-api-dev-354027914002.auth.eu-north-1.amazoncognito.com",
+			"type": "string"
+		},
+		{
+			"key": "redirect-url",
+			"value": "https://example.com",
+			"type": "string"
+		},
+		{
+			"key": "api-url",
+			"value": "https://pxoyioilve.execute-api.eu-north-1.amazonaws.com",
+			"type": "string"
+		},
+		{
+			"key": "api-stage",
+			"value": "dev",
+			"type": "string"
+		},
+		{
+			"key": "id",
+			"value": "6d5460e7-3784-4df5-9d0d-52cdc568013a",
+			"type": "string"
+		},
+		{
+			"key": "none-id",
+			"value": "a7dddb55-c7b6-4003-8002-96f24b6dd701",
+			"type": "string"
+		}
+	]
+}

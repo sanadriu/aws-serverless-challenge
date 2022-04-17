@@ -5,15 +5,15 @@ Description: "Serverless AWS Challenge: Blogs API (Adrian)"
 Parameters:
   EnvironmentMode:
     Type: String
+    Description: Enter "dev" or "prod". Default is "dev".
     Default: dev
     AllowedValues:
       - dev
       - prod
-    Description: Enter "dev" or "prod". Default is "dev".
   ClientURLs:
     Type: CommaDelimitedList
     Description: List of URLs allowed to access to the user pool.
-  
+
 Globals:
   Function:
     Timeout: 15
@@ -35,7 +35,8 @@ Resources:
   BlogsTableName:
     Type: AWS::SSM::Parameter
     Properties: 
-      Name: /blogs-api/table/name
+      Name: 
+        Fn::Sub: /${AWS::StackName}/table/name
       Tier: Standard
       DataType: text
       Type: String
@@ -45,7 +46,8 @@ Resources:
   BlogsTableIdxCreatedAt:
     Type: AWS::SSM::Parameter
     Properties: 
-      Name: /blogs-api/table/idx-createdAt
+      Name: 
+        Fn::Sub: /${AWS::StackName}/table/idx-createdAt
       Tier: Standard
       DataType: text
       Type: String
@@ -54,7 +56,8 @@ Resources:
   BlogsTableIdxUpdatedAt:
     Type: AWS::SSM::Parameter
     Properties: 
-      Name: /blogs-api/table/idx-updatedAt
+      Name: 
+        Fn::Sub: /${AWS::StackName}/table/idx-updatedAt
       Tier: Standard
       DataType: text
       Type: String
@@ -111,21 +114,21 @@ Resources:
   HttpApi:
     Type: AWS::Serverless::HttpApi
     Properties:
-      StageName: 
+      StageName:
         Ref: EnvironmentMode
-      Description: 
-        Fn::Sub: 'HTTP Serverless API for ${EnvironmentMode} stage'
+      Description:
+        Fn::Sub: HTTP Serverless API for ${EnvironmentMode} stage
       Auth:
         Authorizers:
           Cognito:
             AuthorizationScopes:
-              - email
+            - email
             JwtConfiguration:
-              issuer: 
-                Fn::Sub: 'https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPool}'
-              audience: 
-                - Ref: UserPoolClient
-            IdentitySource: "$request.header.Authorization"
+              issuer:
+                Fn::Sub: https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPool}
+              audience:
+              - Ref: UserPoolClient
+            IdentitySource: $request.header.Authorization
 
   Layer:
     Type: AWS::Serverless::LayerVersion
