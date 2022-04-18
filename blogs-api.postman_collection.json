@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "386119d6-a114-423d-8245-b475d2f3280e",
-		"name": "AWS",
+		"name": "blogs-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -21,14 +21,8 @@
 						],
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs/{{id}}",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs",
-								"{{id}}"
-							],
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs", "{{id}}"],
 							"query": [
 								{
 									"key": "id",
@@ -53,14 +47,8 @@
 						],
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs/{{none-id}}",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs",
-								"{{none-id}}"
-							],
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs", "{{none-id}}"],
 							"query": [
 								{
 									"key": "id",
@@ -85,14 +73,8 @@
 						],
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs/foo",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs",
-								"foo"
-							],
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs", "foo"],
 							"query": [
 								{
 									"key": "id",
@@ -116,13 +98,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs"]
 						}
 					},
 					"response": []
@@ -134,13 +111,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs?sort=updatedAt",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs"
-							],
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs"],
 							"query": [
 								{
 									"key": "sort",
@@ -158,13 +130,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs?sort=createdAt",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs"
-							],
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs"],
 							"query": [
 								{
 									"key": "sort",
@@ -196,13 +163,8 @@
 						},
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs"]
 						}
 					},
 					"response": []
@@ -226,13 +188,8 @@
 						},
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs"]
 						}
 					},
 					"response": []
@@ -253,13 +210,8 @@
 						},
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs"]
 						}
 					},
 					"response": []
@@ -285,14 +237,8 @@
 						},
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs/{{id}}",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs",
-								"{{id}}"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs", "{{id}}"]
 						}
 					},
 					"response": []
@@ -316,14 +262,8 @@
 						},
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs/{{id}}",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs",
-								"{{id}}"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs", "{{id}}"]
 						}
 					},
 					"response": []
@@ -344,14 +284,8 @@
 						},
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs/{{none-id}}",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs",
-								"{{none-id}}"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs", "{{none-id}}"]
 						}
 					},
 					"response": []
@@ -372,14 +306,8 @@
 						},
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs/foo",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs",
-								"foo"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs", "foo"]
 						}
 					},
 					"response": []
@@ -400,13 +328,8 @@
 						},
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs"]
 						}
 					},
 					"response": []
@@ -423,14 +346,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs/{{id}}",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs",
-								"{{id}}"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs", "{{id}}"]
 						}
 					},
 					"response": []
@@ -445,14 +362,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs/{{id}}",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs",
-								"{{id}}"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs", "{{id}}"]
 						}
 					},
 					"response": []
@@ -464,14 +375,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs/{{none-id}}",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs",
-								"{{none-id}}"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs", "{{none-id}}"]
 						}
 					},
 					"response": []
@@ -483,14 +388,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs/foo",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs",
-								"foo"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs", "foo"]
 						}
 					},
 					"response": []
@@ -502,13 +401,8 @@
 						"header": [],
 						"url": {
 							"raw": "{{api-url}}/{{api-stage}}/blogs",
-							"host": [
-								"{{api-url}}"
-							],
-							"path": [
-								"{{api-stage}}",
-								"blogs"
-							]
+							"host": ["{{api-url}}"],
+							"path": ["{{api-stage}}", "blogs"]
 						}
 					},
 					"response": []
@@ -576,18 +470,14 @@
 			"listen": "prerequest",
 			"script": {
 				"type": "text/javascript",
-				"exec": [
-					""
-				]
+				"exec": [""]
 			}
 		},
 		{
 			"listen": "test",
 			"script": {
 				"type": "text/javascript",
-				"exec": [
-					""
-				]
+				"exec": [""]
 			}
 		}
 	],
